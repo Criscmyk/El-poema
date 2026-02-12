@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Poema para Salo 💖</title>
+<style>
+  body {
+    margin: 0;
+    padding: 50px;
+    background: linear-gradient(to bottom, #ffe6f0, #ffcccc);
+    font-family: 'Georgia', serif;
+    color: #800040;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+  }
+
+  #poema {
+    font-size: 1.8em;
+    max-width: 800px;
+    margin: 20px auto;
+    min-height: 200px;
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    color: red;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
+  }
+
+  #counter {
+    font-size: 1.5em;
+    margin-top: 30px;
+    color: #ff0066;
+  }
+</style>
+</head>
+<body>
+
+<h1>Un Poema para mi Salo 💖</h1>
+<div id="poema"></div>
+<div id="counter"></div>
+
+<script>
+  // Poema letra por letra
+  const poemaTexto = `Salo, mi amor, cada día contigo es un sueño hermoso.
+Tus ojos iluminan mis días y tu risa llena mi corazón.
+Desde que te conocí, todo tiene más color y alegría.
+Gracias por ser mi amiga, mi cómplice y mi amor eterno.
+Te amo con todo lo que soy y siempre te voy a amar.`;
+
+  const poemaDiv = document.getElementById('poema');
+  let index = 0;
+
+  function escribirPoema() {
+    if (index < poemaTexto.length) {
+      poemaDiv.innerHTML += poemaTexto[index] === '\n' ? '<br>' : poemaTexto[index];
+      index++;
+      setTimeout(escribirPoema, 80); // velocidad de escritura (ms)
+    }
+  }
+  escribirPoema();
+
+  // Contador de tiempo juntos
+  const startDate = new Date("2024-11-20T12:31:00"); // fecha exacta que me diste
+  const counter = document.getElementById('counter');
+
+  function updateCounter() {
+    const now = new Date();
+    let diffTime = now - startDate;
+
+    const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    diffTime -= days * (1000 * 60 * 60 * 24);
+
+    const hours = Math.floor(diffTime / (1000 * 60 * 60));
+    diffTime -= hours * (1000 * 60 * 60);
+
+    const minutes = Math.floor(diffTime / (1000 * 60));
+    diffTime -= minutes * (1000 * 60);
+
+    const seconds = Math.floor(diffTime / 1000);
+
+    counter.textContent = `¡Llevamos ${days} días, ${hours} horas, ${minutes} minutos y ${seconds} segundos juntos! 💕`;
+  }
+
+  setInterval(updateCounter, 1000);
+  updateCounter();
+
+  // Corazones flotando
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = '❤️';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = 15 + Math.random() * 30 + 'px';
+    heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }
+
+  setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
